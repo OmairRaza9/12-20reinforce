@@ -1,5 +1,6 @@
 require 'httparty'
 require 'json'
+require 'pry'
 
 
 # This class represents a world traveller who knows what languages are spoken in each country
@@ -47,6 +48,7 @@ class Multilinguist
   # @return [String] A rough translation of msg
   def say_in_local_language(msg)
     params = {query: {text: msg, to: @current_lang, from: 'en'}}
+    binding.pry
     response = HTTParty.get(TRANSLTR_BASE_URL, params)
     json_response = JSON.parse(response.body)
     json_response['translationText']
